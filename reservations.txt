@@ -1,0 +1,4 @@
+DoctorVisit|D500|P500|Eve Adams|2025-12-30|Dr. Who|INS-500
+LabTest|L500|P501|Frank Bell|2025-12-31|Dr. House|INS-501
+SurgerySlot|S500|P502|Gina Cole|2026-01-02|Dr. Strange|INS-502
+DoctorVisit|LIB-2025-4|P900|Demo Patient|2025-12-31|Dr. Demo|INS-DEMO

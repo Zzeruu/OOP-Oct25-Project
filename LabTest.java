@@ -1,13 +1,19 @@
 public class LabTest extends Reservation {
     
     //fields
-    private String typeOfTest;
+    private String typeOfTest = "Lab Test";
     private String patientID;
     private String insuranceCode;
     private String doctorName;
 
-    public LabTest(String reservationID, String patientName, String reservationDate){
+
+    //constructor
+    public LabTest(String reservationID, String patientID, String patientName, String reservationDate,
+                   String doctorName, String insuranceCode) {
         super(reservationID, patientName, reservationDate);
+        this.patientID = patientID;
+        this.doctorName = doctorName;
+        this.insuranceCode = insuranceCode;
     }
 
     //getters
@@ -26,6 +32,18 @@ public class LabTest extends Reservation {
     public String getDoctorName(){
         return doctorName;
     }
+
+    //setters
+    public void setReservationID(String reservationID){
+        this.reservationID = reservationID;
+    }
+    public void setPatientName(String patientName){
+        this.patientName = patientName;
+    }
+    public void setReservationDate(String reservationDate){
+        this.reservationDate = reservationDate;
+    }
+
 
     //overriding method from Reservation
     @Override

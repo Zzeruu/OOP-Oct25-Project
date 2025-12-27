@@ -1,13 +1,20 @@
 public class DoctorVisit extends Reservation {
     
     //fields
+    private String typeOfTest = "Doctor Visit";
     private String doctorName;
     private String patientID;
     private String insuranceCode;
+    
 
-    public DoctorVisit(String reservationID, String patientName, String reservationDate) {
+    //constructor 
+    public DoctorVisit(String reservationID, String patientID, String patientName, String reservationDate, String doctorName, String insuranceCode) {
         super(reservationID, patientName, reservationDate);
+        this.patientID = patientID;
+        this.doctorName = doctorName;
+        this.insuranceCode = insuranceCode;
     }
+    
 
     //getters
     public String getDoctorName() {
@@ -22,6 +29,21 @@ public class DoctorVisit extends Reservation {
         return insuranceCode;
     }
 
+    public String getTypeOfTest() {
+        return typeOfTest;
+    }
+
+    //setters
+    public void setReservationID(String reservationID){
+        this.reservationID = reservationID;
+    }
+    public void setPatientName(String patientName){
+        this.patientName = patientName;
+    }
+    public void setReservationDate(String reservationDate){
+        this.reservationDate = reservationDate;
+    }
+
     //overriding method from Reservation
     @Override
     public String getConfirmationDetails() {
@@ -31,6 +53,7 @@ public class DoctorVisit extends Reservation {
                "\nPatient Name: " + patientName +
                "\nReservation Date: " + reservationDate +
                "\nDoctor Name: " + doctorName +
-               "\nInsurance Code: " + insuranceCode;
+               "\nInsurance Code: " + insuranceCode +
+               "\nType of Test: " + typeOfTest;
     }
 }

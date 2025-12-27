@@ -1,18 +1,24 @@
 public class SurgerySlot extends Reservation {
     
     //fields
-    private String surgeryType;
+    private String typeOfTest = "Surgery";
     private String doctorName;
     private String patientID;
     private String insuranceCode;
 
-    public SurgerySlot(String reservationID, String patientName, String reservationDate) {
+
+    // constructor
+    public SurgerySlot(String reservationID, String patientID, String patientName, String reservationDate, String doctorName, String insuranceCode) {
         super(reservationID, patientName, reservationDate);
+        this.patientID = patientID;
+        this.doctorName = doctorName;
+        this.insuranceCode = insuranceCode;
+       
     }
 
     //getters
-    public String getSurgeryType() {
-        return surgeryType;
+    public String getTypeOfTest() {
+        return typeOfTest;
     }
 
     public String getDoctorName() {
@@ -27,6 +33,17 @@ public class SurgerySlot extends Reservation {
         return insuranceCode;
     }
 
+    //setters
+    public void setReservationID(String reservationID){
+        this.reservationID = reservationID;
+    }
+    public void setPatientName(String patientName){
+        this.patientName = patientName;
+    }
+    public void setReservationDate(String reservationDate){
+        this.reservationDate = reservationDate;
+    }
+
     //overriding method from Reservation
     @Override
     public String getConfirmationDetails() {
@@ -37,6 +54,6 @@ public class SurgerySlot extends Reservation {
                "\nReservation Date: " + reservationDate +
                "\nDoctor Name: " + doctorName +
                "\nInsurance Code: " + insuranceCode +
-               "\nSurgery Type: " + surgeryType;
+               "\nType of Test: " + typeOfTest;
     }
 }

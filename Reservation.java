@@ -24,5 +24,11 @@ abstract class Reservation{
     public String getReservationDate(){
         return reservationDate;
     }
+
+     //setter for reservationID so managers can assign IDs
+    public void setReservationID(String reservationID) {
+        this.reservationID = reservationID;
+    }
+    
     public abstract String getConfirmationDetails();
 }
