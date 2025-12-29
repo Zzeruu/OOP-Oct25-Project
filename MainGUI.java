@@ -4,16 +4,18 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JEditorPane;
 import javax.swing.JTextField;
 import java.awt.event.*;
 import java.awt.BorderLayout;
+import java.util.List;
 
-public class MainGUI extends JFrame /*implements ActionListener*/{
+public class MainGUI extends JFrame{
     
   //fields
-  private JTextArea mainTextArea;
+  private JEditorPane mainTextArea;
   private JScrollPane mainScroll;
+  private ReservationManager reservationManager = new ReservationManager();
 
   //constructor
   public MainGUI(){
@@ -25,7 +27,8 @@ public class MainGUI extends JFrame /*implements ActionListener*/{
     menuBar();
 
     // main area 
-    mainTextArea = new JTextArea();
+    mainTextArea = new JEditorPane();
+    mainTextArea.setContentType("text/html");
     mainTextArea.setEditable(false);
     mainScroll = new JScrollPane(mainTextArea);
     getContentPane().add(mainScroll, BorderLayout.CENTER);
@@ -91,42 +94,71 @@ public class MainGUI extends JFrame /*implements ActionListener*/{
     private JTextField insuranceCode;
     private JTextField serviceType;
 
-  private void onNew(){
+  public void onNew(){
     
     JFrame reservationForm = new JFrame("Reservation Form");
     reservationForm.setSize(600, 600);
     reservationForm.setLocationRelativeTo(null);
     reservationForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-    
+    reservationForm.setVisible(true);
   }
 
-  private void onSave(){
-      // TODO: implement saving
-      
+  public void onSave(){
+
+      reservationManager.saveToFile("reservations.txt");
+      JOptionPane.showMessageDialog(this, "Reservations saved successfully.", "Save", JOptionPane.INFORMATION_MESSAGE);
     }
 
-  private void onLoad(){
-      // TODO: implement loading
-      
+  public void onLoad(){
+
+      reservationManager.loadFromFile("reservations.txt");
+      List<String> clientLines = reservationManager.getClientDetailsLines();
+      String body;
+      if (clientLines.isEmpty()) body = "<p>No reservations.</p>";
+      else body = String.join("<br><br>", clientLines);
+      mainTextArea.setText("<html><body>" + body + "</p></body></html>");
+      JOptionPane.showMessageDialog(this, "Loaded " + reservationManager.getTotalReservations() + " reservations.", "Load", JOptionPane.INFORMATION_MESSAGE);
     }
 
   private void onExit(){
+
     dispose();
     System.exit(0);
   }
 
   // =========================================================================================
-  private void onListAll(){
 
+  public void onListAll(){
+
+    reservationManager.loadFromFile("reservations.txt");
+    List<String> clientLines = reservationManager.getClientDetailsLines();
+    String header = "<h3>Reservations Report</h3>";
+    String body;
+    if (clientLines.isEmpty()) body = "<p>No reservations.</p>";
+    else body = String.join("<br><br>", clientLines);
+    String html = "<html><body>" + header + body + "</body></html>";
+
+    JFrame listFrame = new JFrame("All Reservations");
+    JEditorPane textArea = new JEditorPane();
+    textArea.setContentType("text/html");
+    textArea.setEditable(false);
+    textArea.setText(html);
+    JScrollPane scroll = new JScrollPane(textArea);
+    listFrame.getContentPane().add(scroll, BorderLayout.CENTER);
+    listFrame.setSize(600, 500);
+    listFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    listFrame.setLocationRelativeTo(this);
+    listFrame.setVisible(true);
   }
 
-  private void onCalendarView(){
+  public void onCalendarView(){
+
     JOptionPane.showMessageDialog(this, "Switching to calendar view (not implemented).", "View", JOptionPane.INFORMATION_MESSAGE);
   }
 
-  private void onAbout(){
-    String aboutMessage = "Hospital Appointment System\nVersion 1.0\nAuthor: (your name)";
+  public void onAbout(){
+
+    String aboutMessage = "Hospital Appointment System\nVersion 0.069a\nAuthor: Riezman";
     JOptionPane.showMessageDialog(this, aboutMessage, "About", JOptionPane.INFORMATION_MESSAGE);
   }
 }

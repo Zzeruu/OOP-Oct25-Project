@@ -8,8 +8,8 @@ public class DoctorVisit extends Reservation {
     
 
     //constructor 
-    public DoctorVisit(String reservationID, String patientID, String patientName, String reservationDate, String doctorName, String insuranceCode) {
-        super(reservationID, patientName, reservationDate);
+    public DoctorVisit(String reservationID, String patientID, String patientName, String reservationDate, String doctorName, String insuranceCode, String contactNo) {
+        super(reservationID, patientName, reservationDate, contactNo);
         this.patientID = patientID;
         this.doctorName = doctorName;
         this.insuranceCode = insuranceCode;
@@ -47,10 +47,10 @@ public class DoctorVisit extends Reservation {
     //overriding method from Reservation
     @Override
     public String getConfirmationDetails() {
-        return "Doctor Visit Details:" +
-               "\nReservation ID: " + reservationID + 
+        return "Reservation ID: " + reservationID + 
                "\nPatient ID: " + patientID +
                "\nPatient Name: " + patientName +
+                "\nContact No: " + contactNo +
                "\nReservation Date: " + reservationDate +
                "\nDoctor Name: " + doctorName +
                "\nInsurance Code: " + insuranceCode +

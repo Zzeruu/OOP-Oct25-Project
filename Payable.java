@@ -1,3 +1,6 @@
 public interface Payable {
-    //placeholder
+
+    void processPayment();
+
+    void applyDiscount(double discount);
 }

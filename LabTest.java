@@ -9,8 +9,8 @@ public class LabTest extends Reservation {
 
     //constructor
     public LabTest(String reservationID, String patientID, String patientName, String reservationDate,
-                   String doctorName, String insuranceCode) {
-        super(reservationID, patientName, reservationDate);
+                   String doctorName, String insuranceCode, String contactNo) {
+        super(reservationID, patientName, reservationDate, contactNo);
         this.patientID = patientID;
         this.doctorName = doctorName;
         this.insuranceCode = insuranceCode;
@@ -48,13 +48,14 @@ public class LabTest extends Reservation {
     //overriding method from Reservation
     @Override
     public String getConfirmationDetails(){
-        return "Lab Test Details:" +
-               "\nReservation ID: " + reservationID +
+        return "Reservation ID: " + reservationID +
                "\nPatient ID: " + patientID +
                "\nPatient Name: " + patientName +
+               "\nContact No: " + contactNo +
                "\nReservation Date: " + reservationDate +
                "\nInsurance Code: " + insuranceCode +
                "\nDoctor Name: " + doctorName +
                "\nType of Test: " + typeOfTest;
     }
+
 }
